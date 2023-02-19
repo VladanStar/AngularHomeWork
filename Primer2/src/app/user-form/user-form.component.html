@@ -1,0 +1,49 @@
+<div class="form-container">
+    <h3>User form</h3>
+    <form  #btnSubmit="ngForm">
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input #fName="ngModel" type="text" [(ngModel)]="user.firstName" name="firstName" class="form-control" id="first-name" placeholder="First Name" required minlength="4">
+          <div *ngIf="fName.errors && fName.dirty" class="errors">
+            <p [hidden]="!fName.errors.required">First Name is Required</p>
+            <p [hidden]="!fName.errors.minlength">First Name should be atleast 4 characters</p>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input #lName="ngModel" type="text" [(ngModel)]="user.lastName" name="lastName" required class="form-control" id="last-name" placeholder="Last Name" required minlength="4">
+            <div *ngIf="lName.errors && fName.dirty" class="errors">
+              <p [hidden]="!lName.errors.required">Last Name is Required</p>
+              <p [hidden]="!lName.errors.minlength">Last Name should be atleast 4 characters</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input #city="ngModel" type="city" [(ngModel)]="user.city" name="city" required class="form-control" id="city"  placeholder="Enter City" required minlength="4">
+            <div *ngIf="city.errors && fName.dirty" class="errors">
+              <p [hidden]="!city.errors.required">City is Required</p>
+              <p [hidden]="!city.errors.minlength">City should be valid</p>
+            </div>
+          </div>
+          
+        <button type="submit" class="btn btn-primary" [disabled]="btnSubmit.form.invalid" (click)="addUser()">Add User</button>
+      </form>
+      <hr>
+      <table class="table table-stripped">
+          <thead>
+              <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">City</th>
+              </tr>
+          </thead>
+          
+          <tr *ngFor="let item of listOfUser">
+              <td>{{item.firstName}}</td>
+              <td>{{item.lastName}}</td>
+              <td>{{item.city}}</td>
+          </tr>
+      </table>
+</div>
+
+
